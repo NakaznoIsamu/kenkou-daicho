@@ -48,7 +48,7 @@ _flutter.buildConfig = {"engineRevision":"af7e796e161ae0bb1ff0758c71a7105418bd9d
 // ・アプリ本体（main.dart.js）には、組み立てごとの印（?v=…）を付けて読む
 //   → 新しい版では別の名前になるので、ブラウザが覚えている古い本体が使われない
 //   （{{…}} は組み立てのときに「"数字" /* 説明 */」に置き換わるので、文字の中ではなく式として使う）
-var kenkouBuildMark = "1608911441" /* Flutter's service worker is deprecated and will be removed in a future Flutter release. */;
+var kenkouBuildMark = "2947060610" /* Flutter's service worker is deprecated and will be removed in a future Flutter release. */;
 (_flutter.buildConfig.builds || []).forEach(function (b) {
   if (b.mainJsPath) b.mainJsPath = b.mainJsPath + '?v=' + kenkouBuildMark;
 });
