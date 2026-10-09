@@ -38,10 +38,43 @@ addEventListener("message", eventListener);
 if (!window._flutter) {
   window._flutter = {};
 }
-_flutter.buildConfig = {"engineRevision":"af7e796e161ae0bb1ff0758c71a7105418bd9ded","wasmHashes":{"canvaskit.wasm":"fbed517a43e82452404446683f00f2e876d835aed84410695759e67b6bb01cd3","chromium/canvaskit.wasm":"ae8ff1d858140f7b1300ced3fa89fb8c9dce0a400a0f4f1e11f6dcfb3315fdcf","skwasm.wasm":"e540fd5e8303b7b68ec2718cb49e9c421f8ade3075b15e02a7059a62654df9a1","skwasm_heavy.wasm":"565f5cc1cca6ab120f11934b105f01fec4b58b480c82e0889dca93af8e6f8635","webparagraph/canvaskit.wasm":"0ce1b05082efdc8529550e8a01f6ff0593972d55525035010e26f5600aa9f254","wimp.wasm":"e924eaafd801d41e017d178f3fd5cf8a417f641fe35c9ed34a4e1d7582283e0c"},"builds":[{"compileTarget":"dart2js","renderer":"canvaskit","mainJsPath":"main.dart.js"},{}]};
+_flutter.buildConfig = {"engineRevision":"af7e796e161ae0bb1ff0758c71a7105418bd9ded","wasmHashes":{"canvaskit.wasm":"fbed517a43e82452404446683f00f2e876d835aed84410695759e67b6bb01cd3","chromium/canvaskit.wasm":"ae8ff1d858140f7b1300ced3fa89fb8c9dce0a400a0f4f1e11f6dcfb3315fdcf","skwasm.wasm":"e540fd5e8303b7b68ec2718cb49e9c421f8ade3075b15e02a7059a62654df9a1","skwasm_heavy.wasm":"565f5cc1cca6ab120f11934b105f01fec4b58b480c82e0889dca93af8e6f8635","webparagraph/canvaskit.wasm":"0ce1b05082efdc8529550e8a01f6ff0593972d55525035010e26f5600aa9f254","wimp.wasm":"e924eaafd801d41e017d178f3fd5cf8a417f641fe35c9ed34a4e1d7582283e0c"},"builds":[{"compileTarget":"dart2js","renderer":"canvaskit","mainJsPath":"main.dart.js"},{}],"useLocalCanvasKit":true};
+
+
+// 工事台帳の起動の設定
+// ・足りない文字を、よそのサイト（Google の fonts.gstatic.com）に取りに行かない
+//   （申し送り書：よそのサイトから読み込まない。足りない文字は出ないだけ）
+// ・画面を描く仕組みは、組み立てるときに --no-web-resources-cdn を付けてアプリの中に入れる
+// ・アプリ本体（main.dart.js）には、組み立てごとの印（?v=…）を付けて読む
+//   → 新しい版では別の名前になるので、ブラウザが覚えている古い本体が使われない
+//   （{{…}} は組み立てのときに「"数字" /* 説明 */」に置き換わるので、文字の中ではなく式として使う）
+var kenkouBuildMark = "1887428976" /* Flutter's service worker is deprecated and will be removed in a future Flutter release. */;
+(_flutter.buildConfig.builds || []).forEach(function (b) {
+  if (b.mainJsPath) b.mainJsPath = b.mainJsPath + '?v=' + kenkouBuildMark;
+});
+
+// 「更新する」を押したとき：古い覚え（キャッシュ）を捨てて、読み直す
+// ・前の Flutter が残したオフライン用の仕組み（サービスワーカー）と、その覚えを片付ける
+// ・入口のファイルを、覚えを使わずに取り直してから読み直す（GitHub Pages でもミニPCでも効く）
+window.kenkouHardReload = async function () {
+  try {
+    if (navigator.serviceWorker) {
+      for (const r of await navigator.serviceWorker.getRegistrations()) await r.unregister();
+    }
+  } catch (e) {}
+  try {
+    if (window.caches) {
+      for (const k of await caches.keys()) await caches.delete(k);
+    }
+  } catch (e) {}
+  const files = ['./', 'index.html', 'flutter_bootstrap.js', 'flutter.js', 'version.json', 'manifest.json',
+                 'assets/AssetManifest.bin.json', 'assets/FontManifest.json'];
+  await Promise.all(files.map(function (f) { return fetch(f, { cache: 'reload' }).catch(function () {}); }));
+  location.reload();
+};
 
 _flutter.loader.load({
-  serviceWorkerSettings: {
-    serviceWorkerVersion: "372345446" /* Flutter's service worker is deprecated and will be removed in a future Flutter release. */
-  }
+  config: {
+    fontFallbackBaseUrl: 'no-font-fallback/',
+  },
 });
