@@ -29596,7 +29596,7 @@ d=A.aUH(a,a2==null||a2.a===0?e:e.O2(a2))
 d.r.n(0,"Accept","application/json")
 k=$.aq6
 if(k!=null)d.r.n(0,"Authorization","Bearer "+k)
-d.r.n(0,"X-Kenkou-App",""+202610092349)
+d.r.n(0,"X-Kenkou-App",""+202610100002)
 if(a1!=null){d.r.n(0,"Content-Type","application/json")
 d.sate(B.ci.D0(a1,null))}n=null
 p=4
@@ -29988,9 +29988,9 @@ return A.L(null,r)
 case 1:return A.K(p.at(-1),r)}})
 return A.M($async$x9,r)},
 aVG(){var s=$.aVK
-if(s>0&&202610092349<s)$.Lq().sp(B.KK)
+if(s>0&&202610100002<s)$.Lq().sp(B.KK)
 else{s=$.aP5
-if(s>202610092349&&s!==$.aVH)$.Lq().sp(B.KJ)
+if(s>202610100002&&s!==$.aVH)$.Lq().sp(B.KJ)
 else $.Lq().sp(B.lK)}},
 b7F(){var s=$.Lq()
 if(s.a!==B.KJ)return
@@ -106125,7 +106125,7 @@ case 6:case 1:return A.L(q,r)}})
 return A.M($async$tc,r)},
 H(a){return new A.mR($.Lq(),new A.asR(this),null,null,t.YY)},
 aqJ(a){var s=null
-return A.e2(s,A.h8(!0,new A.ay(B.fv,A.bx(A.b([B.ai6,B.aA,B.agA,B.h7,A.aL(A.c1(B.ahh,new A.asM(this,a),s),72,s),B.cv,A.A("\u7248 1.0.0\uff08"+A.aXS(202610092349)+"\uff09",s,s,s,B.ps,B.bk,s,s)],t.p),B.aG,B.e8,B.n),s),B.a7,!0),s)}}
+return A.e2(s,A.h8(!0,new A.ay(B.fv,A.bx(A.b([B.ai6,B.aA,B.agA,B.h7,A.aL(A.c1(B.ahh,new A.asM(this,a),s),72,s),B.cv,A.A("\u7248 1.0.0\uff08"+A.aXS(202610100002)+"\uff09",s,s,s,B.ps,B.bk,s,s)],t.p),B.aG,B.e8,B.n),s),B.a7,!0),s)}}
 A.asP.prototype={
 $1(a){var s=null
 return A.dS(A.b([A.cA(B.h9,s,s,new A.asN(a),s,A.hK(s,s,s,s,s,s,s,s,s,B.aa,s,s,s,s,s,s,s,s,s,s)),A.c1(B.Ki,new A.asO(a),s)],t.p),s,B.agy,B.aiw)},
@@ -106154,7 +106154,7 @@ $0(){return this.a.tc(this.b,!1)},
 $S:0}
 A.Wx.prototype={
 H(a){var s=null
-return A.h8(!0,new A.ay(B.QP,A.A("\u7248 1.0.0\uff08"+A.aXS(202610092349)+"\uff09",s,s,s,B.acF,B.dd,s,s),s),B.a7,!1)}}
+return A.h8(!0,new A.ay(B.QP,A.A("\u7248 1.0.0\uff08"+A.aXS(202610100002)+"\uff09",s,s,s,B.acF,B.dd,s,s),s),B.a7,!1)}}
 A.jl.prototype={
 H(a){var s=null
 return A.aL(A.va(A.i6(this.c,s,s,32),A.A(this.d,s,s,s,B.bE,s,s,s),this.e,s),88,s)}}
